@@ -1,0 +1,49 @@
+html,
+body {
+    background: white;
+    width: 100%;
+    height: 100%;
+}
+
+
+.passanger-box {
+    max-width: 100px;
+    display: inline-block;
+}
+
+.w3-bold {
+    font-weight: bold;
+}
+
+.w3-bolder {
+    font-weight: bolder;
+}
+
+.w3-upper {
+    text-transform: uppercase;
+}
+
+.w3-lower {
+    text-transform: lowercase;
+}
+
+.w3-underline {
+    text-decoration: underline;
+}
+
+
+.main-message-box {
+
+    position: fixed;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(82, 5, 164, 0.8);
+
+    padding-top: 10%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+}

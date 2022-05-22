@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="./css/style.css" rel="stylesheet" />
+  <title>Taxi Rank App</title>
+</head>
+
+<body>
+  <script type="module" src="./js/rank-data.js"></script>
+  <script type="module" src="./js/app.js"></script>
+  <div id="app">
+    <div class="w3-padding w3-xlarge w3-indigo w3-text-white w3-bold w3-center w3-padding-16">
+      Taxi Rank App
+    </div>
+
+    <div class="w3-row" x-data="taxiRank">
+
+      <div class="main-message-box w3-center w3-indigo" x-show="newDestinationError.length>0">
+        <div x-text="newDestinationError" class="w3-text-white w3-padding w3-xlarge w3-padding-24"></div>
+        <button class="w3-button w3-white" @click="newDestinationError =''">Close</button>
+      </div>
+
+      <div class="w3-padding w3-orange w3-row" x-show="showDestination">
+        <h2 class="w3-padding w3-xlarge w3-text-white"><i class="fa fa-taxi"></i> New Destination <i
+            class="fa fa-taxi"></i></h2>
+
+        <div class="w3-row">
+          <div class="w3-half w3-padding w3-text-white"><i class="fa fa-taxi"></i> Destination <input
+              class="w3-input w3-border" x-model="newDestination" />
+          </div>
+          <div class="w3-half w3-padding w3-text-white"><i class="fa fa-money"></i> Fare <input
+              class="w3-input w3-border" x-model="newFare" type="number" />
+          </div>
+        </div>
+
+
+        <div class="w3-padding"><button class="w3-button w3-purple" @click="addDestination()"><i class="fa fa-plus"></i>
+            Add Destination</button></div>
+      </div>
+
+      <div>
+        <button class="w3-button w3-purple" @click="showDestination = !showDestination"><i class="fa fa-car"></i>Toggle
+          New Destination</button>
+
+
+      </div>
+
+      <div class="w3-row">
+        <template x-for="route in checkRoutes" :key="route.destination">
+          <div class="w3-half w3-padding">
+            <div class="w3-border w3-border-teal" id="route.destination">
+              <div class="destination w3-teal w3-text-white w3-large w3-center w3-padding-16 w3-bold ">
+                <span x-text="route.destination"></span> - R<span x-text="route.fare"></span>
+              </div>
+
+              <div class="w3-padding">
+                <div class="">
+                  <div class="w3-padding-16 w3-bolder w3-text-teal">Board Passenger
+
+
+                    <template x-if="route.taxiQueue <= 0">
+                      <i class="fa fa-times w3-text-red w3-large"> Not Available</i>
+                    </template>
+                    <template x-if="route.taxiQueue > 0">
+                      <i class="fa fa-check w3-text-green w3-large"> Available</i>
+                    </template>
+                  </div>
+
+                  <div class="w3-padding">
+                    <i class="fa fa-taxi w3-xlarge w3-text-yellow"></i> <span x-text="route.taxiQueue"></span> Taxis
+                    Available
+                  </div>
+
+                  <div class="w3-row w3-padding w3-medium">
+                    <div class="w3-third"><i class=" w3-text-purple fa fa-user"></i> Passengers waiting: <span
+                        x-text="route.numPassengers"></span>
+                    </div>
+                    <div class="w3-third"><i class="w3-text-maroon fa fa-car w3-text-brown"></i> Taxi Trips:
+                      <span class="" x-text="route.departed"></span>
+                    </div>
+                    <div class="w3-third"><i class="w3-text-maroon fa fa-file w3-text-green"></i> Income: R<span
+                        class="" x-text="route.income"></span>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="taxi-queue">
+
+                  <div class="w3-padding-16 w3-row">
+
+                    <div class="w3-half w3-large">
+                      <h5>Add Passenger</h5>
+                      <input type="number" min="1" class="w3-input w3-border w3-green passanger-box"
+                        x-model="route.noPassengers" />
+                      <button class="w3-button w3-border" @click="addPassenger(route.destination,route.noPassengers)"><i
+                          class="fa fa-user-plus w3-text-indigo"></i> <span x-text="route.noPassengers"></span></button>
+
+                      <button class="w3-button w3-border"
+                        @click="removePassenger(route.destination,route.noPassengers)"><i
+                          class="fa fa-user-times w3-text-red"></i> <span x-text="route.noPassengers"></span></button>
+                    </div>
+
+                    <div class="w3-half">
+                      <h5>Add Taxi</h5>
+                      <input type="number" min="1" class="w3-input w3-border w3-green passanger-box"
+                        x-model="route.taxiNo" />
+                      <button class="w3-button" @click="addTaxi(route.destination,route.taxiNo)">
+                        <i class="fa fa-plus w3-button w3-indigo w3-bolder"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
