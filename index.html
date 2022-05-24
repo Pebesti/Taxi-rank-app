@@ -6,13 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   <link href="./css/style.css" rel="stylesheet" />
   <title>Taxi Rank App</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.0/dist/alpine.min.js" defer></script>
+  <script src="./js/app.js"></script>
 </head>
 
 <body>
-  <script type="module" src="./js/rank-data.js"></script>
-  <script type="module" src="./js/app.js"></script>
+
   <div id="app">
     <div class="w3-padding w3-xlarge w3-indigo w3-text-white w3-bold w3-center w3-padding-16">
       Taxi Rank App
@@ -51,7 +54,7 @@
       </div>
 
       <div class="w3-row">
-        <template x-for="route in checkRoutes" :key="route.destination">
+        <template x-for="route in checkRoutes()" :key="route.destination">
           <div class="w3-half w3-padding">
             <div class="w3-border w3-border-teal" id="route.destination">
               <div class="destination w3-teal w3-text-white w3-large w3-center w3-padding-16 w3-bold ">
